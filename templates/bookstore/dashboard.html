@@ -1,0 +1,124 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<h1 class="containers" style="text-align: center">Home</h1>
+<div class="containers text-center pb-2">
+  <div class="row">
+    <div class="col">
+      Total Orders :
+      <span class="badge text-bg-primary">{{ total_orders }}</span>
+    </div>
+    <div class="col">
+      Pending Orders :
+      <span class="badge text-bg-warning">{{ pending_orders }}</span>
+    </div>
+    <div class="col">
+      Delivired Orders :
+      <span class="badge text-bg-success">{{ delevired_orders }}</span>
+    </div>
+    <div class="col">
+      In Progress Orders :
+      <span class="badge text-bg-secondary">{{ in_progress_orders }}</span>
+    </div>
+    <div class="col">
+      Cancelled Orders :
+      <span class="badge text-bg-danger">{{ cancelled_orders }}</span>
+    </div>
+  </div>
+</div>
+<div class="containers">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            Customers
+            <span class="badge text-bg-info">{{ customers.count }}</span>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <a class="btn btn-success" href="#"
+              ><i class="fa-solid fa-user-plus"></i
+            ></a>
+          </h6>
+          <table class="table">
+            <thead>
+              <tr class="table-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Show</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for customer in customers %}
+              <tr>
+                <th scope="row">{{customer.id}}</th>
+                <td>{{customer.name|title}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.phone}}</td>
+                <td>
+                  <a href="{% url 'customer' customer.id%}"
+                    ><i class="fa-solid fa-eye"></i
+                  ></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            Orders <span class="badge text-bg-info">{{ total_orders }}</span>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <a class="btn btn-success" href="{% url 'create' %}"
+              ><i class="fa-solid fa-cart-plus"></i
+            ></a>
+          </h6>
+          <table class="table">
+            <thead>
+              <tr class="table-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Book</th>
+                <th scope="col">Status</th>
+                {% comment %}
+                <th scope="col">Date</th>
+                {% endcomment %}
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in orders %}
+              <tr>
+                <th scope="row">{{order.id}}</th>
+                <td>{{order.customer|title}}</td>
+                <td>{{order.book}}</td>
+                <td>{{order.status}}</td>
+                {% comment %}
+                <td>{{order.date_created}}</td>
+                {% endcomment %}
+                <td>
+                  <a href="{% url 'update' order.id %}" class="text-primary"
+                    ><i class="fa-solid fa-pen-to-square"></i
+                  ></a>
+                  <a href="{% url 'delete' order.id %}" class="text-danger"
+                    ><i class="fa-solid fa-trash"></i
+                  ></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

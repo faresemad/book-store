@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h1 class="containers" style="text-align: center">Customers</h1>
+<div class="containers">
+  <div class="content">
+    {% for customer in customers %}
+      <div class="card" style="width: 15rem;">
+        <img src="/static{{customer.image.url}}" class="card-img-top" />
+          <div class="card-body">
+            <h5 class="card-title">{{customer.name|title}}</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+          </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{customer.email}}</li>
+          <li class="list-group-item">{{customer.phone}}</li>
+          <li class="list-group-item">{{customer.age}}</li>
+        </ul>
+          <div class="card-body">
+            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+          </div>
+      </div>
+    {% endfor %}
+  <div class="card" aria-hidden="true" style="width: 15rem">
+  {% comment %} <img src="..." class="card-img-top" alt="..."> {% endcomment %}
+  <div class="card-body">
+    <h5 class="card-title placeholder-glow">
+      <span class="placeholder col-6"></span>
+    </h5>
+    <p class="card-text placeholder-glow">
+      <span class="placeholder col-7"></span>
+      <span class="placeholder col-4"></span>
+      <span class="placeholder col-4"></span>
+      <span class="placeholder col-6"></span>
+      <span class="placeholder col-8"></span>
+    </p>
+    <a href="#" tabindex="-1" class="btn btn-primary disabled placeholder col-6"></a>
+  </div>
+</div>
+  </div>
+</div>
+
+{% endblock content %}

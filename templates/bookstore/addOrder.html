@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div class="container">
+    <div class="content">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.management_form }}
+            {% for item in form %}
+            {{item}} <br>
+            {% endfor %}
+            <input type="submit" value="Submit" class="btn btn-primary mb-3">
+        </form>
+    </div>
+</div>
+{% endblock content %}
